@@ -2,7 +2,29 @@ version: '3.4'
 
 services:
   coursework2apiserver:
+    depends_on:
+      - db
     image: ${DOCKER_REGISTRY-}coursework2apiserver
     build:
       context: .
       dockerfile: CourseWork2ApiServer/Dockerfile
+    restart: always
+    links: 
+      - "db:database"
+    ports:
+      - "80:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+
+  
+  db:
+    image: postgres
+    restart: always
+    environment:
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+    external: true
