@@ -23,31 +23,31 @@ namespace CourseWork2ApiServer.Models
             //var folder = Environment.SpecialFolder.LocalApplicationData;
             //var path = Environment.GetFolderPath(folder);
             //DbPath = System.IO.Path.Join(path, "Test.db");
-            //Database.EnsureCreated();
+            Database.EnsureCreated();
             SaveChangesTask = new Task(() => SaveChanges());
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PatientsDrug>().HasKey(c =>
-                new { c.PatientId, c.DrugId, c.DateOfManufacture });
+                new {c.PatientId, c.DrugId, c.DateOfManufacture});
             modelBuilder.Entity<TakenMedication>().HasKey(c =>
-                new { c.PatientId, c.DrugId, c.DateTime });
+                new {c.PatientId, c.DrugId, c.DateTime});
             modelBuilder.Entity<DoctorsAppointment>().HasKey(c =>
-                new { c.PatientId, c.DoctorId, c.DateTime });
+                new {c.PatientId, c.DoctorId, c.DateTime});
             modelBuilder.Entity<PrescribedMedication>().HasKey(c =>
-                new { c.DoctorsAppointmentId, c.DrugId });
+                new {c.DoctorsAppointmentId, c.DrugId});
             modelBuilder.Entity<PatientProcedure>().HasKey(c =>
-                new { c.PatientId, c.ProcedureId, c.DateTime });
+                new {c.PatientId, c.ProcedureId, c.DateTime});
             modelBuilder.Entity<WellBeingRecord>().HasKey(c =>
-                new { c.PatientId, c.DateTime });
+                new {c.PatientId, c.DateTime});
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TestDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(ConnectionStringClass.ConnectionStringMSSql);
             //optionsBuilder.UseSqlite($"Data Source={DbPath}");
-            optionsBuilder.UseNpgsql(ConnectionStringClass.ConnectionString);
+            //optionsBuilder.UseNpgsql(ConnectionStringClass.ConnectionString);
         }
 
         public Task SaveChangesTask;

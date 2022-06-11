@@ -7,26 +7,26 @@ namespace CourseWork2ApiServer.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class PatientProceduresController : ControllerBase
+public class PatientDoctorsAppointmentController : ControllerBase
 {
     private readonly ILogger<OAuthController> _logger;
 
-    public PatientProceduresController(ILogger<OAuthController> logger)
+    public PatientDoctorsAppointmentController(ILogger<OAuthController> logger)
     {
         _logger = logger;
     }
 
-    public class OutputPatientProcedure
+    public class OutputPatientDoctorsAppointment
     {
         [Required] public DateTime DateTime { get; set; }
 
-        [Required] public Procedure Procedure { get; set; }
+        [Required] public Doctor Doctor { get; set; }
 
         public string? Note { get; set; }
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<OutputPatientProcedure>>> Get(DateTime beforeDate)
+    public async Task<ActionResult<IEnumerable<OutputPatientDoctorsAppointment>>> Get(DateTime beforeDate)
     {
         var db = new MyDbContext();
         string token = Request.Headers.Authorization;
@@ -36,14 +36,14 @@ public class PatientProceduresController : ControllerBase
         if (oAuth == null)
             return Problem(statusCode: 403);
 
-        return new ActionResult<IEnumerable<OutputPatientProcedure>>(db.PatientProcedures
-            .Include(pp => pp.Procedure).Where(pp => pp.PatientId == oAuth.PatientId)
+        return new ActionResult<IEnumerable<OutputPatientDoctorsAppointment>>(db.DoctorsAppointments
+            .Include(pp => pp.Doctor).Where(pp => pp.PatientId == oAuth.PatientId)
             .Where(p => !p.Visited & p.DateTime < beforeDate & p.DateTime > DateTime.Today)
-            .Select(p => new OutputPatientProcedure()
+            .Select(p => new OutputPatientDoctorsAppointment()
             {
                 DateTime = p.DateTime,
                 Note = p.Note,
-                Procedure = p.Procedure
+                Doctor = p.Doctor
             }));
     }
 }

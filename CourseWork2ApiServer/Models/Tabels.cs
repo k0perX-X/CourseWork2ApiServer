@@ -8,16 +8,16 @@ namespace CourseWork2ApiServer.Models
         [Required] public int Id { get; set; }
         [Required] public string Name { get; set; }
         [Required] public string Surname { get; set; }
-        public string MiddleName { get; set; }
+        public string? MiddleName { get; set; }
         [Required] public DateTime Birthdate { get; set; }
         [Required] public string Email { get; set; }
         [Required] public string Password { get; set; }
-        public List<PatientProcedure> Procedures { get; set; }
-        public List<WellBeingRecord> WellBeingRecords { get; set; }
-        public List<TakenMedication> TakenMedications { get; set; }
-        public List<PatientsDrug> PatientsDrugs { get; set; }
-        public List<DoctorsAppointment> DoctorsAppointments { get; set; }
-        public List<OAuth> Tokens { get; set; }
+        public virtual List<PatientProcedure> Procedures { get; set; }
+        public virtual List<WellBeingRecord> WellBeingRecords { get; set; }
+        public virtual List<TakenMedication> TakenMedications { get; set; }
+        public virtual List<PatientsDrug> PatientsDrugs { get; set; }
+        public virtual List<DoctorsAppointment> DoctorsAppointments { get; set; }
+        public virtual List<OAuth> Tokens { get; set; }
     }
 
     public class OAuth
@@ -26,7 +26,7 @@ namespace CourseWork2ApiServer.Models
         public string? OtherInformation { get; set; }
         [Required] public DateTime CreateTime { get; set; }
         [Required] public string DeviceInformation { get; set; }
-        [Required] public Patient Patient { get; set; }
+        [Required] public virtual Patient Patient { get; set; }
         [Required] public int PatientId { get; set; }
     }
 
@@ -35,12 +35,12 @@ namespace CourseWork2ApiServer.Models
         [Required] public int Id { get; set; }
 
         //[Key]
-        [Required] public Patient Patient { get; set; }
+        [Required] public virtual Patient Patient { get; set; }
         [Required] public int PatientId { get; set; }
 
 
         //[Key]
-        [Required] public Drug Drug { get; set; }
+        [Required] public virtual Drug Drug { get; set; }
         [Required] public int DrugId { get; set; }
 
         [Required] public int Remaining { get; set; }
@@ -63,11 +63,11 @@ namespace CourseWork2ApiServer.Models
         [Required] public int Id { get; set; }
 
         //[Key]
-        [Required] public Patient Patient { get; set; }
+        [Required] public virtual Patient Patient { get; set; }
         [Required] public int PatientId { get; set; }
 
         //[Key]
-        [Required] public Drug Drug { get; set; }
+        [Required] public virtual Drug Drug { get; set; }
         [Required] public int DrugId { get; set; }
 
         //[Key]
@@ -82,11 +82,11 @@ namespace CourseWork2ApiServer.Models
         [Required] public int Id { get; set; }
 
         //[Key]
-        [Required] public Patient Patient { get; set; }
+        [Required] public virtual Patient Patient { get; set; }
         [Required] public int PatientId { get; set; }
 
         //[Key]
-        [Required] public Doctor Doctor { get; set; }
+        [Required] public virtual Doctor Doctor { get; set; }
         [Required] public int DoctorId { get; set; }
         public double? PatientTemperature { get; set; }
 
@@ -96,7 +96,7 @@ namespace CourseWork2ApiServer.Models
         [Required] public DateTime DateTime { get; set; }
         [Required] public bool Visited { get; set; }
 
-        public List<PrescribedMedication> PrescribedMedications { get; set; }
+        public virtual List<PrescribedMedication> PrescribedMedications { get; set; }
     }
 
     public class Doctor
@@ -117,11 +117,11 @@ namespace CourseWork2ApiServer.Models
         [Required] public int Id { get; set; }
 
         //[Key]
-        [Required] public DoctorsAppointment DoctorsAppointment { get; set; }
+        [Required] public virtual DoctorsAppointment DoctorsAppointment { get; set; }
         [Required] public int DoctorsAppointmentId { get; set; }
 
         //[Key]
-        [Required] public Drug Drug { get; set; }
+        [Required] public virtual Drug Drug { get; set; }
         [Required] public int DrugId { get; set; }
         [Required] public bool ReceptionTimeInTheMorning { get; set; }
         [Required] public bool ReceptionTimeDuringTheDay { get; set; }
@@ -132,7 +132,6 @@ namespace CourseWork2ApiServer.Models
 
         public string? Note { get; set; }
 
-        //[Key] // не нужен, но нужен при генерации чтобы изменить
         [Required] public DateTime TakeMedicineBeforeTheDate { get; set; }
     }
 
@@ -144,13 +143,13 @@ namespace CourseWork2ApiServer.Models
         [Required] public DateTime DateTime { get; set; }
 
         //[Key]
-        [Required] public Procedure Procedure { get; set; }
+        [Required] public virtual Procedure Procedure { get; set; }
         [Required] public int ProcedureId { get; set; }
 
         public string? Note { get; set; }
 
         //[Key]
-        [Required] public Patient Patient { get; set; }
+        [Required] public virtual Patient Patient { get; set; }
         [Required] public int PatientId { get; set; }
         [Required] public bool Visited { get; set; }
     }
@@ -174,7 +173,7 @@ namespace CourseWork2ApiServer.Models
         public string? Note { get; set; }
 
         //[Key]
-        [Required] public Patient Patient { get; set; }
+        [Required] public virtual Patient Patient { get; set; }
         [Required] public int PatientId { get; set; }
     }
 }

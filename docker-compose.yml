@@ -3,28 +3,43 @@ version: '3.4'
 services:
   coursework2apiserver:
     depends_on:
-      - db
+      #- db
+      - mssql
     image: ${DOCKER_REGISTRY-}coursework2apiserver
     build:
       context: .
       dockerfile: CourseWork2ApiServer/Dockerfile
     restart: always
     links: 
-      - "db:database"
+      #- "db:postgres"
+      - "mssql:mssql"
     ports:
       - "80:80"
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
 
-  
-  db:
-    image: postgres
+  #db:
+  #  image: postgres
+  #  restart: always
+  #  environment:
+  #    PGDATA: "/var/lib/postgresql/data/pgdata"
+  #  volumes:
+  #    - db:/var/lib/postgresql/data
+  #  ports:
+  #    - "1058:5432"
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
     restart: always
     environment:
-      PGDATA: "/var/lib/postgresql/data/pgdata"
+      ACCEPT_EULA: "Y"
     volumes:
-      - db:/var/lib/postgresql/data
+      - mssql:/var/opt/mssql
+    ports:
+      - "1058:1433"
 
 volumes:
   db:
+    external: true
+  mssql:
     external: true

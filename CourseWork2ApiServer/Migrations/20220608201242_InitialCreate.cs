@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -14,15 +13,15 @@ namespace CourseWork2ApiServer.Migrations
                 name: "Doctors",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Surname = table.Column<string>(type: "text", nullable: false),
-                    MiddleName = table.Column<string>(type: "text", nullable: false),
-                    Birthdate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Note = table.Column<string>(type: "text", nullable: true),
-                    Email = table.Column<string>(type: "text", nullable: false),
-                    Password = table.Column<string>(type: "text", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Birthdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -33,11 +32,11 @@ namespace CourseWork2ApiServer.Migrations
                 name: "Drugs",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Note = table.Column<string>(type: "text", nullable: true),
-                    ExplorationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExplorationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,14 +47,14 @@ namespace CourseWork2ApiServer.Migrations
                 name: "Patients",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Surname = table.Column<string>(type: "text", nullable: false),
-                    MiddleName = table.Column<string>(type: "text", nullable: false),
-                    Birthdate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
-                    Password = table.Column<string>(type: "text", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Birthdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,10 +65,10 @@ namespace CourseWork2ApiServer.Migrations
                 name: "Procedures",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Note = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -80,13 +79,13 @@ namespace CourseWork2ApiServer.Migrations
                 name: "DoctorsAppointments",
                 columns: table => new
                 {
-                    PatientId = table.Column<int>(type: "integer", nullable: false),
-                    DoctorId = table.Column<int>(type: "integer", nullable: false),
-                    DateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false),
-                    PatientTemperature = table.Column<double>(type: "double precision", nullable: true),
-                    Note = table.Column<string>(type: "text", nullable: true),
-                    Visited = table.Column<bool>(type: "boolean", nullable: false)
+                    PatientId = table.Column<int>(type: "int", nullable: false),
+                    DoctorId = table.Column<int>(type: "int", nullable: false),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    PatientTemperature = table.Column<double>(type: "float", nullable: true),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Visited = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -109,11 +108,11 @@ namespace CourseWork2ApiServer.Migrations
                 name: "OAuths",
                 columns: table => new
                 {
-                    Token = table.Column<string>(type: "text", nullable: false),
-                    OtherInformation = table.Column<string>(type: "text", nullable: true),
-                    CreateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    DeviceInformation = table.Column<string>(type: "text", nullable: false),
-                    PatientId = table.Column<int>(type: "integer", nullable: false)
+                    Token = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    OtherInformation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeviceInformation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PatientId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -130,11 +129,11 @@ namespace CourseWork2ApiServer.Migrations
                 name: "PatientsDrugs",
                 columns: table => new
                 {
-                    PatientId = table.Column<int>(type: "integer", nullable: false),
-                    DrugId = table.Column<int>(type: "integer", nullable: false),
-                    DateOfManufacture = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false),
-                    Remaining = table.Column<int>(type: "integer", nullable: false)
+                    PatientId = table.Column<int>(type: "int", nullable: false),
+                    DrugId = table.Column<int>(type: "int", nullable: false),
+                    DateOfManufacture = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Remaining = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -157,13 +156,13 @@ namespace CourseWork2ApiServer.Migrations
                 name: "TakenMedications",
                 columns: table => new
                 {
-                    PatientId = table.Column<int>(type: "integer", nullable: false),
-                    DrugId = table.Column<int>(type: "integer", nullable: false),
-                    DateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false),
-                    ReceptionTimeInTheMorning = table.Column<bool>(type: "boolean", nullable: false),
-                    ReceptionTimeDuringTheDay = table.Column<bool>(type: "boolean", nullable: false),
-                    ReceptionTimeInTheEvening = table.Column<bool>(type: "boolean", nullable: false)
+                    PatientId = table.Column<int>(type: "int", nullable: false),
+                    DrugId = table.Column<int>(type: "int", nullable: false),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    ReceptionTimeInTheMorning = table.Column<bool>(type: "bit", nullable: false),
+                    ReceptionTimeDuringTheDay = table.Column<bool>(type: "bit", nullable: false),
+                    ReceptionTimeInTheEvening = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -186,11 +185,11 @@ namespace CourseWork2ApiServer.Migrations
                 name: "WellBeingRecords",
                 columns: table => new
                 {
-                    DateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    PatientId = table.Column<int>(type: "integer", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false),
-                    Temperature = table.Column<double>(type: "double precision", nullable: true),
-                    Note = table.Column<string>(type: "text", nullable: true)
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PatientId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Temperature = table.Column<double>(type: "float", nullable: true),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -207,12 +206,12 @@ namespace CourseWork2ApiServer.Migrations
                 name: "PatientProcedures",
                 columns: table => new
                 {
-                    DateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ProcedureId = table.Column<int>(type: "integer", nullable: false),
-                    PatientId = table.Column<int>(type: "integer", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false),
-                    Note = table.Column<string>(type: "text", nullable: true),
-                    Visited = table.Column<bool>(type: "boolean", nullable: false)
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ProcedureId = table.Column<int>(type: "int", nullable: false),
+                    PatientId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Visited = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -235,26 +234,26 @@ namespace CourseWork2ApiServer.Migrations
                 name: "PrescribedMedications",
                 columns: table => new
                 {
-                    DoctorsAppointmentId = table.Column<int>(type: "integer", nullable: false),
-                    DrugId = table.Column<int>(type: "integer", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false),
-                    DoctorsAppointmentPatientId = table.Column<int>(type: "integer", nullable: false),
-                    DoctorsAppointmentDoctorId = table.Column<int>(type: "integer", nullable: false),
-                    DoctorsAppointmentDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ReceptionTimeInTheMorning = table.Column<bool>(type: "boolean", nullable: false),
-                    ReceptionTimeDuringTheDay = table.Column<bool>(type: "boolean", nullable: false),
-                    ReceptionTimeInTheEvening = table.Column<bool>(type: "boolean", nullable: false),
-                    TakeBeforeMeals = table.Column<bool>(type: "boolean", nullable: false),
-                    TakeAfterMeals = table.Column<bool>(type: "boolean", nullable: false),
-                    TakeWithMeals = table.Column<bool>(type: "boolean", nullable: false),
-                    Note = table.Column<string>(type: "text", nullable: true),
-                    TakeMedicineBeforeTheDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    DoctorsAppointmentId = table.Column<int>(type: "int", nullable: false),
+                    DrugId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    DoctorsAppointmentPatientId = table.Column<int>(type: "int", nullable: false),
+                    DoctorsAppointmentDoctorId = table.Column<int>(type: "int", nullable: false),
+                    DoctorsAppointmentDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ReceptionTimeInTheMorning = table.Column<bool>(type: "bit", nullable: false),
+                    ReceptionTimeDuringTheDay = table.Column<bool>(type: "bit", nullable: false),
+                    ReceptionTimeInTheEvening = table.Column<bool>(type: "bit", nullable: false),
+                    TakeBeforeMeals = table.Column<bool>(type: "bit", nullable: false),
+                    TakeAfterMeals = table.Column<bool>(type: "bit", nullable: false),
+                    TakeWithMeals = table.Column<bool>(type: "bit", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TakeMedicineBeforeTheDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PrescribedMedications", x => new { x.DoctorsAppointmentId, x.DrugId });
                     table.ForeignKey(
-                        name: "FK_PrescribedMedications_DoctorsAppointments_DoctorsAppointmen~",
+                        name: "FK_PrescribedMedications_DoctorsAppointments_DoctorsAppointmentPatientId_DoctorsAppointmentDoctorId_DoctorsAppointmentDateTime",
                         columns: x => new { x.DoctorsAppointmentPatientId, x.DoctorsAppointmentDoctorId, x.DoctorsAppointmentDateTime },
                         principalTable: "DoctorsAppointments",
                         principalColumns: new[] { "PatientId", "DoctorId", "DateTime" },
@@ -288,7 +287,7 @@ namespace CourseWork2ApiServer.Migrations
                 column: "DrugId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PrescribedMedications_DoctorsAppointmentPatientId_DoctorsAp~",
+                name: "IX_PrescribedMedications_DoctorsAppointmentPatientId_DoctorsAppointmentDoctorId_DoctorsAppointmentDateTime",
                 table: "PrescribedMedications",
                 columns: new[] { "DoctorsAppointmentPatientId", "DoctorsAppointmentDoctorId", "DoctorsAppointmentDateTime" });
 

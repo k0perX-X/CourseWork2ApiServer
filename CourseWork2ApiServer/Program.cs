@@ -4,13 +4,10 @@ namespace CourseWork2ApiServer;
 
 internal static class Program
 {
-
-    //db controller run
-    public static MyDbContext Db = new MyDbContext();
-
     [STAThread]
     static void Main(string[] args)
     {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
         var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +27,7 @@ internal static class Program
             app.UseSwaggerUI();
         }
 
-        app.UseAuthorization();
+        //app.UseAuthorization();
 
         app.MapControllers();
 
