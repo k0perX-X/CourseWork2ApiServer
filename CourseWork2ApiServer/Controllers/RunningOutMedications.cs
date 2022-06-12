@@ -35,55 +35,74 @@ public class RunningOutMedications : ControllerBase
         if (oAuth == null)
             return Problem(statusCode: 403);
 
-        var list = await db.DoctorsAppointments
+        var doctorsAppointments = await db.DoctorsAppointments
             .Where(da => da.PatientId == oAuth.PatientId)
             .Include(da => da.PrescribedMedications)
+            .ThenInclude(pm => pm.Drug)
+            .ToListAsync();
+        var list = doctorsAppointments
             .SelectMany(da => da.PrescribedMedications
                 .Select(pm => new {PM = pm, Date = da.DateTime}))
             .Where(pm => pm.PM.TakeMedicineBeforeTheDate >= DateTime.Now)
-            .Select(pm => new {pm.PM, DaysRemaining = (pm.PM.TakeMedicineBeforeTheDate - pm.Date).Days})
-            .ToListAsync();
+            .Select(pm => new {pm.PM, DaysRemaining = (pm.PM.TakeMedicineBeforeTheDate - pm.Date).Days});
         var receptionTimeDuringTheDay = list
             .Where(pm => pm.PM.ReceptionTimeDuringTheDay)
-            .GroupBy(pm => pm.PM.Drug)
+            .GroupBy(pm => pm.PM.Drug.Id)
             .Select(g => new
             {
-                Drug = g.Key,
-                LeftToTake = list.Max(pm => pm.DaysRemaining)
-            });
+                DrugId = g.Key,
+                LeftToTake = g.Max(pm => pm.DaysRemaining)
+            }).ToList();
         var receptionTimeInTheEvening = list
             .Where(pm => pm.PM.ReceptionTimeInTheEvening)
-            .GroupBy(pm => pm.PM.Drug)
+            .GroupBy(pm => pm.PM.Drug.Id)
             .Select(g => new
             {
-                Drug = g.Key,
-                LeftToTake = list.Max(pm => pm.DaysRemaining)
-            });
+                DrugId = g.Key,
+                LeftToTake = g.Max(pm => pm.DaysRemaining)
+            }).ToList();
         var receptionTimeInTheMorning = list
             .Where(pm => pm.PM.ReceptionTimeInTheMorning)
-            .GroupBy(pm => pm.PM.Drug)
+            .GroupBy(pm => pm.PM.Drug.Id)
             .Select(g => new
             {
-                Drug = g.Key,
-                LeftToTake = list.Max(pm => pm.DaysRemaining)
-            });
-        return new ActionResult<IEnumerable<OutputRunningOutMedications>>(receptionTimeDuringTheDay
-            .Concat(receptionTimeInTheEvening).Concat(receptionTimeInTheMorning)
-            .GroupBy(r => r.Drug)
+                DrugId = g.Key,
+                LeftToTake = g.Max(pm => pm.DaysRemaining)
+            }).ToList();
+        var r1 = receptionTimeDuringTheDay
+            .Concat(receptionTimeInTheEvening).Concat(receptionTimeInTheMorning);
+        var r2 = r1.GroupBy(r => r.DrugId)
             .Select(g => new
             {
                 LeftToTake = g.Sum(r => r.LeftToTake),
-                Drug = g.Key
-            })
-            .Join(PatientMedicationsRemainingData.Data(db, oAuth),
-                s => s.Drug,
-                pmr => pmr.Drug,
-                (s, pmr) => new OutputRunningOutMedications()
-                {
-                    Drug = pmr.Drug,
-                    Remaining = pmr.Remaining,
-                    LeftToTake = s.LeftToTake
-                })
-            .Where(pmr => pmr.Remaining < pmr.LeftToTake));
+                DrugId = g.Key
+            });
+
+        var r4 =
+            from s in r2
+            join pmr in PatientDrugsRemainingData.Data(db, oAuth)
+                on s.DrugId equals pmr.Drug.Id into gj
+            from pmr in gj.DefaultIfEmpty()
+            select new OutputRunningOutMedications()
+            {
+                Drug = pmr?.Drug ?? db.Drugs.First(d => s.DrugId == d.Id),
+                Remaining = pmr?.Remaining ?? 0,
+                LeftToTake = s.LeftToTake
+            };
+
+        var r5 = r4.ToList();
+
+        //var r3 = r2.Join(PatientDrugsRemainingData.Data(db, oAuth),
+        //        s => s.DrugId,
+        //        pmr => pmr.Drug.Id,
+        //        (s, pmr) => new OutputRunningOutMedications()
+        //        {
+        //            Drug = pmr.Drug,
+        //            Remaining = pmr.Remaining,
+        //            LeftToTake = s.LeftToTake
+        //        })
+        //    .Where(pmr => pmr.Remaining < pmr.LeftToTake)
+        //    .ToList();
+        return new(r5);
     }
 }

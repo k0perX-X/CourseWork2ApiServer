@@ -19,7 +19,7 @@ public class OAuthController : ControllerBase
     public static async Task<OAuth?> GenerateOAuth(string eMail, string password, string deviceInformation)
     {
         var db = new MyDbContext();
-        Patient? patient = db.Patients.FirstOrDefault(p => p.Email == eMail);
+        Patient? patient = db.Patients.FirstOrDefault(p => p.Email.ToLower() == eMail.ToLower());
         if (patient == null)
             return null;
         if (!BCrypt.Net.BCrypt.Verify(password, patient.Password))

@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CourseWork2ApiServer.Models.MyDbContext">
+    <Position X="9.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAHABAEAAQBAAAAAAAAAAAAQEAAAAAAABgAAIAAAAAA=</HashCode>
+      <FileName>Models\MyDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Models.Patient">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAEAASAAAAAAAAAQAAQQBAAAAAACAAAAIAABAAA=</HashCode>
+      <FileName>Models\Tabels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Models.OAuth">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAACAAAEAAAAAAEAAAAAAAAAAAABCAA=</HashCode>
+      <FileName>Models\Tabels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Models.PatientsDrug">
+    <Position X="2.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQIAAAAAEAAAAAAAAAAAAAAAAAAAQAAACEA=</HashCode>
+      <FileName>Models\Tabels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Models.Drug">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAACAAEAAAA=</HashCode>
+      <FileName>Models\Tabels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Models.TakenMedication">
+    <Position X="5.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACAAAAAQJAAAAAEAAAAAAAAAAAAAQAAAAABAAACAA=</HashCode>
+      <FileName>Models\Tabels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Models.DoctorsAppointment">
+    <Position X="5.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAAAQQAAAAAAAAAAAAAAAAACAAQAAAAAAAEACAA=</HashCode>
+      <FileName>Models\Tabels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Models.Doctor">
+    <Position X="4" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAAAAAQAAQABAAAAAACAAAAAAEAAAA=</HashCode>
+      <FileName>Models\Tabels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Models.PrescribedMedication">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACAAAAAANAAAAAEAAEAACAAAAAAAIAAAAAJAEAAEA=</HashCode>
+      <FileName>Models\Tabels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Models.PatientProcedure">
+    <Position X="9.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAACAAAAQQAAAAAgAAAAAAAAAAAAAAQAAAAAAAEACAA=</HashCode>
+      <FileName>Models\Tabels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Models.Procedure">
+    <Position X="4" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\Tabels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Models.WellBeingRecord">
+    <Position X="9.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAAAAAAAAAAAAAAAAAAAAQAAAAAAAEECAA=</HashCode>
+      <FileName>Models\Tabels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Controllers.OAuthController">
+    <Position X="2.25" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="CourseWork2ApiServer.Controllers.OAuthController.TokenClass">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\OAuthController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="CourseWork2ApiServer.Controllers.OAuthController.PostClass">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\OAuthController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Controllers\OAuthController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Controllers.PatientDoctorsAppointmentController">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="CourseWork2ApiServer.Controllers.PatientDoctorsAppointmentController.OutputPatientDoctorsAppointment">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\PatientDoctorsAppointmentController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\PatientDoctorsAppointmentController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Controllers.PatientDrugsController">
+    <Position X="0.5" Y="9.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="CourseWork2ApiServer.Controllers.PatientDrugsController.OutputPatientDrugs">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\PatientDrugsController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\PatientDrugsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Controllers.PatientDrugsRemainingData">
+    <Position X="0.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\PatientDrugsRemainingController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Controllers.PatientDrugsRemainingController">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="CourseWork2ApiServer.Controllers.PatientDrugsRemainingController.OutputPatientMedications">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\PatientDrugsRemainingController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\PatientDrugsRemainingController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Controllers.PatientMedicineWillGoBadController">
+    <Position X="4" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\PatientMedicineWillGoBad.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Controllers.PatientPrescribedMedicationsController">
+    <Position X="7.5" Y="6.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="CourseWork2ApiServer.Controllers.PatientPrescribedMedicationsController.OutputPatientPrescribedMedication">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\PatientPrescribedMedicationsController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\PatientPrescribedMedicationsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Controllers.PatientProceduresController">
+    <Position X="2.25" Y="7.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="CourseWork2ApiServer.Controllers.PatientProceduresController.OutputPatientProcedure">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\PatientProceduresController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\PatientProceduresController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Controllers.PatientsController">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAQAAAAABAAAAAAAAAAAAAiEAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Controllers\PatientsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Controllers.RunningOutMedications">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="CourseWork2ApiServer.Controllers.RunningOutMedications.OutputRunningOutMedications">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\RunningOutMedications.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\RunningOutMedications.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Controllers.TakeMedicine">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\TakeMedicine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.ConnectionStringClass">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAQAAA=</HashCode>
+      <FileName>ConnectionStringClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CourseWork2ApiServer.Program">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

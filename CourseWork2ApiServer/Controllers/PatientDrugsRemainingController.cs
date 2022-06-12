@@ -5,31 +5,39 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CourseWork2ApiServer.Controllers;
 
-public static class PatientMedicationsRemainingData
+public static class PatientDrugsRemainingData
 {
-    public static IEnumerable<PatientMedicationsRemaining.OutputPatientMedications> Data(MyDbContext db, OAuth oAuth)
+    public static IEnumerable<PatientDrugsRemainingController.OutputPatientMedications> Data(MyDbContext db, OAuth oAuth)
     {
         return db.PatientsDrugs
-            .Include(pd => pd.Drug)
             .Where(pd => pd.PatientId == oAuth.PatientId & pd.Remaining > 0)
-            .GroupBy(pd => pd.Drug)
-            .Select(g => new PatientMedicationsRemaining.OutputPatientMedications()
+            .GroupBy(pd => pd.DrugId)
+            .Select(g => new 
                 {
                     Remaining = g.Sum(pd => pd.Remaining),
-                    Drug = g.Key,
+                    DrugId = g.Key,
                     MinimalDateOfManufacture = g.Min(pd => pd.DateOfManufacture)
-                }
-            );
+                })
+            .Join(
+                db.Drugs,
+                n => n.DrugId,
+                d => d.Id,
+                (n, d) => new PatientDrugsRemainingController.OutputPatientMedications()
+                {
+                    Drug = d, 
+                    MinimalDateOfManufacture = n.MinimalDateOfManufacture,
+                    Remaining = n.Remaining,
+                }).ToList();
     }
 }
 
 [ApiController]
 [Route("[controller]")]
-public class PatientMedicationsRemaining : ControllerBase
+public class PatientDrugsRemainingController : ControllerBase
 {
     private readonly ILogger<OAuthController> _logger;
 
-    public PatientMedicationsRemaining(ILogger<OAuthController> logger)
+    public PatientDrugsRemainingController(ILogger<OAuthController> logger)
     {
         _logger = logger;
     }
@@ -57,6 +65,6 @@ public class PatientMedicationsRemaining : ControllerBase
         //where[Patient ID] = @SelectedPatient and Remaining > 0) as pd
         //    group by[Drug ID]
 
-        return new ActionResult<IEnumerable<OutputPatientMedications>>(PatientMedicationsRemainingData.Data(db, oAuth));
+        return new ActionResult<IEnumerable<OutputPatientMedications>>(PatientDrugsRemainingData.Data(db, oAuth));
     }
 }
