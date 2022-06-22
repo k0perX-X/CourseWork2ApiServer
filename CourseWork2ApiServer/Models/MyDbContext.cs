@@ -24,7 +24,6 @@ namespace CourseWork2ApiServer.Models
             //var path = Environment.GetFolderPath(folder);
             //DbPath = System.IO.Path.Join(path, "Test.db");
             Database.EnsureCreated();
-            SaveChangesTask = new Task(() => SaveChanges());
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -50,6 +49,5 @@ namespace CourseWork2ApiServer.Models
             //optionsBuilder.UseNpgsql(ConnectionStringClass.ConnectionString);
         }
 
-        public Task SaveChangesTask;
     }
 }

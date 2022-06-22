@@ -67,4 +67,41 @@ public class PatientDrugsRemainingController : ControllerBase
 
         return new ActionResult<IEnumerable<OutputPatientMedications>>(PatientDrugsRemainingData.Data(db, oAuth));
     }
+
+    public class DrugResponse
+    {
+        public int Id { get; set; }
+        public DateTime DateOfManufacture { get; set; }
+        public int Remaining { get; set; }
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<OutputPatientMedications>> Post(DrugResponse drug)
+    {
+        var db = new MyDbContext();
+        string token = Request.Headers.Authorization;
+        if (string.IsNullOrEmpty(token))
+            return Problem(statusCode: 401);
+        var oAuth = await db.OAuths.FirstOrDefaultAsync(t => t.Token == token);
+        if (oAuth == null)
+            return Problem(statusCode: 403);
+
+        Drug? d = await db.Drugs.FirstOrDefaultAsync(d => d.Id == drug.Id);
+
+        if (d == null)
+            return Problem(statusCode: 404);
+
+        db.PatientsDrugs.Add(new PatientsDrug()
+        {
+            DateOfManufacture = drug.DateOfManufacture,
+            DrugId = drug.Id,
+            Drug = d,
+            PatientId = oAuth.PatientId,
+            Patient = oAuth.Patient,
+            Remaining = drug.Remaining,
+        });
+        await db.SaveChangesAsync();
+
+        return PatientDrugsRemainingData.Data(db, oAuth).First(p => p.Drug == d);
+    }
 }

@@ -21,6 +21,7 @@ public class PatientWellBeingRecordController : ControllerBase
         public double Temperature { get; set; }
 
         public string Note { get; set; }
+        
     }
 
     public class WellBeingRecordResponse
@@ -56,6 +57,7 @@ public class PatientWellBeingRecordController : ControllerBase
         };
         db.WellBeingRecords.Add(newWellBeingRecord);
         new Task(() => db.SaveChanges()).Start();
+
         return new(new WellBeingRecordResponse()
         {
             DateTime = newWellBeingRecord.DateTime, 
