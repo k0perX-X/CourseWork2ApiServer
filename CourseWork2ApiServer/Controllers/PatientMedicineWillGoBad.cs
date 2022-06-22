@@ -17,7 +17,8 @@ public class PatientMedicineWillGoBadController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<PatientDrugsRemainingController.OutputPatientMedications>>> Get(DateTime beforeDate)
+    public async Task<ActionResult<IEnumerable<PatientDrugsRemainingController.OutputPatientMedications>>> Get(
+        DateTime beforeDate)
     {
         var db = new MyDbContext();
         string token = Request.Headers.Authorization;
@@ -31,16 +32,19 @@ public class PatientMedicineWillGoBadController : ControllerBase
             .Where(pd => pd.PatientId == oAuth.PatientId)
             .Include(pd => pd.Drug)
             .ToListAsync();
-        return new(list
+        var list2 = list
             .Where(pd => pd.Remaining > 0)
             .Where(pd =>
-                pd.DateOfManufacture.Date +
-                TimeSpan.FromDays((pd.Drug.ExplorationDate.Date.Month - 1 + (pd.Drug.ExplorationDate.Date.Year - 1) * 12) * 30.5 +
-                                  pd.Drug.ExplorationDate.Date.Day) < beforeDate
-                & pd.DateOfManufacture.Date +
-                TimeSpan.FromDays((pd.Drug.ExplorationDate.Date.Month - 1 + (pd.Drug.ExplorationDate.Date.Year - 1) * 12) * 30.5 +
-                                  pd.Drug.ExplorationDate.Date.Day) > DateTime.Today)
-            .GroupBy(pd => pd.DrugId)
+                    pd.DateOfManufacture.Date +
+                    TimeSpan.FromDays(
+                        (pd.Drug.ExplorationDate.Date.Month - 1 + (pd.Drug.ExplorationDate.Date.Year - 1) * 12) * 30.5 +
+                        pd.Drug.ExplorationDate.Date.Day - 1) < beforeDate
+                // & pd.DateOfManufacture.Date +
+                // TimeSpan.FromDays(
+                //     (pd.Drug.ExplorationDate.Date.Month - 1 + (pd.Drug.ExplorationDate.Date.Year - 1) * 12) * 30.5 +
+                //     pd.Drug.ExplorationDate.Date.Day) > DateTime.Today
+            );
+        return new(list2.GroupBy(pd => pd.DrugId)
             .Select(g => new PatientDrugsRemainingController.OutputPatientMedications()
             {
                 MinimalDateOfManufacture = g.Min(pd => pd.DateOfManufacture),

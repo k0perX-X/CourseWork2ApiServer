@@ -93,12 +93,13 @@ public class PatientDrugsRemainingController : ControllerBase
 
         db.PatientsDrugs.Add(new PatientsDrug()
         {
-            DateOfManufacture = drug.DateOfManufacture,
+            DateOfManufacture = drug.DateOfManufacture.Date,
             DrugId = drug.Id,
             Drug = d,
             PatientId = oAuth.PatientId,
             Patient = oAuth.Patient,
             Remaining = drug.Remaining,
+            Id = db.PatientsDrugs.Count() + 1,
         });
         await db.SaveChangesAsync();
 
